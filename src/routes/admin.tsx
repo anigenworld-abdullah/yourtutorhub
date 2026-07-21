@@ -180,13 +180,13 @@ function HeroTab() {
 
 /* --------------------- CRUD LIST GENERIC --------------------- */
 
-function CrudSection<T extends { id: string }>({
+function CrudSection({
   title, table, queryKey, columns, useData, blank,
 }: {
   title: string; table: string; queryKey: string;
-  columns: { key: keyof T; label: string; type?: "text" | "textarea" | "url" | "number" }[];
-  useData: () => { data?: T[] | null };
-  blank: Partial<T>;
+  columns: { key: string; label: string; type?: "text" | "textarea" | "url" | "number" }[];
+  useData: () => { data?: any[] | null };
+  blank: Record<string, any>;
 }) {
   const { data } = useData();
   const qc = useQueryClient();
