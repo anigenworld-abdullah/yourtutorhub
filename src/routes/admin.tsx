@@ -193,7 +193,7 @@ function CrudSection({
   const [editing, setEditing] = useState<any>(blank);
   const [isNew, setIsNew] = useState(true);
 
-  const load = (row: T) => { setEditing(row); setIsNew(false); };
+  const load = (row: any) => { setEditing(row); setIsNew(false); };
   const reset = () => { setEditing(blank); setIsNew(true); };
   const save = async () => {
     const payload = { ...editing };
