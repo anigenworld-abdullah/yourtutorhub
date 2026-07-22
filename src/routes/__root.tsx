@@ -13,6 +13,7 @@ import appCss from "../styles.css?url";
 import { reportLovableError } from "../lib/lovable-error-reporting";
 import { SiteProvider } from "../lib/site-context";
 import "../lib/i18n";
+import { FloatingContact } from "@/components/site/FloatingContact";
 
 function NotFoundComponent() {
   return (
@@ -58,10 +59,13 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { name: "twitter:description", content: "Expert home tutors for every subject. Personalized lessons that help students shine." },
       { property: "og:image", content: "https://storage.googleapis.com/gpt-engineer-file-uploads/attachments/og-images/b2627f24-778f-4ac9-b7ad-479bdc3b72fd" },
       { name: "twitter:image", content: "https://storage.googleapis.com/gpt-engineer-file-uploads/attachments/og-images/b2627f24-778f-4ac9-b7ad-479bdc3b72fd" },
+      { name: "theme-color", content: "#ff5aa8" },
     ],
     links: [
       { rel: "stylesheet", href: appCss },
       { rel: "icon", href: "/favicon.ico", type: "image/x-icon" },
+      { rel: "manifest", href: "/manifest.webmanifest" },
+      { rel: "apple-touch-icon", href: "/favicon.ico" },
     ],
   }),
   shellComponent: RootShell,
@@ -85,6 +89,7 @@ function RootComponent() {
     <QueryClientProvider client={queryClient}>
       <SiteProvider>
         <Outlet />
+        <FloatingContact />
       </SiteProvider>
     </QueryClientProvider>
   );

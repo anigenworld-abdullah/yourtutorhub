@@ -37,6 +37,15 @@ export const useTeachers = () =>
     },
   });
 
+export const useTeacherBySlug = (slug: string) =>
+  useQuery({
+    queryKey: ["teacher", slug],
+    queryFn: async () => {
+      const { data } = await supabase.from("teachers").select("*").eq("slug", slug).maybeSingle();
+      return data;
+    },
+  });
+
 export const useContacts = () =>
   useQuery({
     queryKey: ["contacts"],
