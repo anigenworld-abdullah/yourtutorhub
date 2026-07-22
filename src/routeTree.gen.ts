@@ -12,6 +12,8 @@ import { Route as rootRouteImport } from './routes/__root'
 import { Route as AuthRouteImport } from './routes/auth'
 import { Route as AdminRouteImport } from './routes/admin'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as TeachersSlugRouteImport } from './routes/teachers.$slug'
+import { Route as TeacherEditTokenRouteImport } from './routes/teacher.edit.$token'
 
 const AuthRoute = AuthRouteImport.update({
   id: '/auth',
@@ -28,35 +30,64 @@ const IndexRoute = IndexRouteImport.update({
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const TeachersSlugRoute = TeachersSlugRouteImport.update({
+  id: '/teachers/$slug',
+  path: '/teachers/$slug',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const TeacherEditTokenRoute = TeacherEditTokenRouteImport.update({
+  id: '/teacher/edit/$token',
+  path: '/teacher/edit/$token',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/admin': typeof AdminRoute
   '/auth': typeof AuthRoute
+  '/teachers/$slug': typeof TeachersSlugRoute
+  '/teacher/edit/$token': typeof TeacherEditTokenRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/admin': typeof AdminRoute
   '/auth': typeof AuthRoute
+  '/teachers/$slug': typeof TeachersSlugRoute
+  '/teacher/edit/$token': typeof TeacherEditTokenRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/admin': typeof AdminRoute
   '/auth': typeof AuthRoute
+  '/teachers/$slug': typeof TeachersSlugRoute
+  '/teacher/edit/$token': typeof TeacherEditTokenRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/admin' | '/auth'
+  fullPaths:
+    | '/'
+    | '/admin'
+    | '/auth'
+    | '/teachers/$slug'
+    | '/teacher/edit/$token'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/admin' | '/auth'
-  id: '__root__' | '/' | '/admin' | '/auth'
+  to: '/' | '/admin' | '/auth' | '/teachers/$slug' | '/teacher/edit/$token'
+  id:
+    | '__root__'
+    | '/'
+    | '/admin'
+    | '/auth'
+    | '/teachers/$slug'
+    | '/teacher/edit/$token'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AdminRoute: typeof AdminRoute
   AuthRoute: typeof AuthRoute
+  TeachersSlugRoute: typeof TeachersSlugRoute
+  TeacherEditTokenRoute: typeof TeacherEditTokenRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -82,6 +113,20 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/teachers/$slug': {
+      id: '/teachers/$slug'
+      path: '/teachers/$slug'
+      fullPath: '/teachers/$slug'
+      preLoaderRoute: typeof TeachersSlugRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/teacher/edit/$token': {
+      id: '/teacher/edit/$token'
+      path: '/teacher/edit/$token'
+      fullPath: '/teacher/edit/$token'
+      preLoaderRoute: typeof TeacherEditTokenRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
@@ -89,6 +134,8 @@ const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AdminRoute: AdminRoute,
   AuthRoute: AuthRoute,
+  TeachersSlugRoute: TeachersSlugRoute,
+  TeacherEditTokenRoute: TeacherEditTokenRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
