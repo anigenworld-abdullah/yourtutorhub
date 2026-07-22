@@ -93,7 +93,10 @@ export type Database = {
         Row: {
           created_at: string
           detail: string
+          extra_images: Json
+          icon: string | null
           id: string
+          long_description: string | null
           media_type: string | null
           media_url: string | null
           sort: number
@@ -102,7 +105,10 @@ export type Database = {
         Insert: {
           created_at?: string
           detail: string
+          extra_images?: Json
+          icon?: string | null
           id?: string
+          long_description?: string | null
           media_type?: string | null
           media_url?: string | null
           sort?: number
@@ -111,7 +117,10 @@ export type Database = {
         Update: {
           created_at?: string
           detail?: string
+          extra_images?: Json
+          icon?: string | null
           id?: string
+          long_description?: string | null
           media_type?: string | null
           media_url?: string | null
           sort?: number
@@ -121,6 +130,8 @@ export type Database = {
       }
       site_settings: {
         Row: {
+          book_cta_label: string
+          contact_phone: string | null
           default_language: string
           hero_bg_url: string | null
           hero_subtitle: string
@@ -136,6 +147,8 @@ export type Database = {
           updated_at: string
         }
         Insert: {
+          book_cta_label?: string
+          contact_phone?: string | null
           default_language?: string
           hero_bg_url?: string | null
           hero_subtitle?: string
@@ -151,6 +164,8 @@ export type Database = {
           updated_at?: string
         }
         Update: {
+          book_cta_label?: string
+          contact_phone?: string | null
           default_language?: string
           hero_bg_url?: string | null
           hero_subtitle?: string
@@ -167,36 +182,98 @@ export type Database = {
         }
         Relationships: []
       }
+      teacher_invites: {
+        Row: {
+          created_at: string
+          email: string | null
+          id: string
+          teacher_id: string
+          token: string
+        }
+        Insert: {
+          created_at?: string
+          email?: string | null
+          id?: string
+          teacher_id: string
+          token: string
+        }
+        Update: {
+          created_at?: string
+          email?: string | null
+          id?: string
+          teacher_id?: string
+          token?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "teacher_invites_teacher_id_fkey"
+            columns: ["teacher_id"]
+            isOneToOne: false
+            referencedRelation: "teachers"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       teachers: {
         Row: {
           bio: string | null
           created_at: string
+          email: string | null
           experience: string | null
+          facebook: string | null
           id: string
+          instagram: string | null
+          linkedin: string | null
           name: string
+          phone: string | null
           photo_url: string | null
+          show_contact: boolean
+          slug: string | null
           sort: number
           subject: string
+          twitter: string | null
+          website: string | null
+          whatsapp: string | null
         }
         Insert: {
           bio?: string | null
           created_at?: string
+          email?: string | null
           experience?: string | null
+          facebook?: string | null
           id?: string
+          instagram?: string | null
+          linkedin?: string | null
           name: string
+          phone?: string | null
           photo_url?: string | null
+          show_contact?: boolean
+          slug?: string | null
           sort?: number
           subject: string
+          twitter?: string | null
+          website?: string | null
+          whatsapp?: string | null
         }
         Update: {
           bio?: string | null
           created_at?: string
+          email?: string | null
           experience?: string | null
+          facebook?: string | null
           id?: string
+          instagram?: string | null
+          linkedin?: string | null
           name?: string
+          phone?: string | null
           photo_url?: string | null
+          show_contact?: boolean
+          slug?: string | null
           sort?: number
           subject?: string
+          twitter?: string | null
+          website?: string | null
+          whatsapp?: string | null
         }
         Relationships: []
       }
@@ -234,6 +311,51 @@ export type Database = {
         Returns: boolean
       }
       is_admin: { Args: { _user_id: string }; Returns: boolean }
+      update_teacher_via_invite: {
+        Args: {
+          _bio: string
+          _email: string
+          _experience: string
+          _facebook: string
+          _instagram: string
+          _linkedin: string
+          _name: string
+          _phone: string
+          _photo_url: string
+          _show_contact: boolean
+          _subject: string
+          _token: string
+          _twitter: string
+          _website: string
+          _whatsapp: string
+        }
+        Returns: {
+          bio: string | null
+          created_at: string
+          email: string | null
+          experience: string | null
+          facebook: string | null
+          id: string
+          instagram: string | null
+          linkedin: string | null
+          name: string
+          phone: string | null
+          photo_url: string | null
+          show_contact: boolean
+          slug: string | null
+          sort: number
+          subject: string
+          twitter: string | null
+          website: string | null
+          whatsapp: string | null
+        }
+        SetofOptions: {
+          from: "*"
+          to: "teachers"
+          isOneToOne: true
+          isSetofReturn: false
+        }
+      }
     }
     Enums: {
       app_role: "main_admin" | "admin"

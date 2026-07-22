@@ -1,0 +1,12 @@
+{
+  "name": "Your Tutor Hub",
+  "short_name": "Tutor Hub",
+  "description": "Expert home tutors for every subject.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#0f0b1e",
+  "theme_color": "#ff5aa8",
+  "icons": [
+    { "src": "/favicon.ico", "sizes": "64x64", "type": "image/x-icon" }
+  ]
+}

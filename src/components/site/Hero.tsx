@@ -57,7 +57,7 @@ export function Hero() {
             className="mt-8 flex flex-wrap gap-3"
           >
             <SoundButton onClick={() => document.getElementById("contact")?.scrollIntoView({ behavior: "smooth" })}>
-              <GraduationCap className="h-4 w-4" /> {t("hero.cta")}
+              <GraduationCap className="h-4 w-4" /> {settings?.book_cta_label || t("hero.cta")}
             </SoundButton>
             <SoundButton variant="outline" onClick={() => document.getElementById("services")?.scrollIntoView({ behavior: "smooth" })}>
               {t("hero.secondary")}
